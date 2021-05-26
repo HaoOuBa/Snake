@@ -27,7 +27,27 @@ module.exports = {
 			{
 				test: /\.less$/,
 				/* 从后往前执行 */
-				use: ['style-loader', 'css-loader', 'less-loader']
+				use: [
+					'style-loader',
+					'css-loader',
+					{
+						/* CSS兼容 */
+						loader: 'postcss-loader',
+						options: {
+							postcssOptions: {
+								plugins: [
+									[
+										'postcss-preset-env',
+										{
+											browsers: 'last 2 versions'
+										}
+									]
+								]
+							}
+						}
+					},
+					'less-loader'
+				]
 			}
 		]
 	},
