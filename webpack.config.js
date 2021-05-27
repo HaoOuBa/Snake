@@ -1,12 +1,11 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-	mode: 'none',
-	entry: path.join(__dirname, './src/index.ts'),
+	mode: 'production',
+	entry: './src/index.ts',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'bundle.js'
@@ -21,44 +20,36 @@ module.exports = {
 			/* TS文件解析 */
 			{
 				test: /\.ts$/,
+				exclude: /node_modules/,
 				use: 'ts-loader'
 			},
 			/* LESS文件解析 */
 			{
 				test: /\.less$/,
 				/* 从后往前执行 */
-				use: [
-					'style-loader',
-					'css-loader',
-					{
-						/* CSS兼容 */
-						loader: 'postcss-loader',
-						options: {
-							postcssOptions: {
-								plugins: [
-									[
-										'postcss-preset-env',
-										{
-											browsers: 'last 2 versions'
-										}
-									]
-								]
-							}
-						}
-					},
-					'less-loader'
-				]
+				use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+			},
+			/* 字体解析 */
+			{
+				test: /\.(ttf|eot|woff|woff2|svg)$/,
+				use: 'file-loader'
+			},
+			/* 图片解析 */
+			{
+				test: /\.(png|jpg|jpeg|gif)$/,
+				use: 'url-loader'
 			}
 		]
 	},
 	plugins: [
 		/* 清除dist目录 */
 		new CleanWebpackPlugin(),
-		/* 启动项目进度条 */
-		new ProgressBarPlugin(),
 		/* 生成HTML模板 */
 		new HtmlWebpackPlugin({
 			template: './src/index.html'
 		})
-	]
+	],
+	resolve: {
+		extensions: ['.js', '.ts']
+	}
 };

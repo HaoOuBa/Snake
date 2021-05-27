@@ -1,0 +1,97 @@
+@keyframes Gradient {
+	0% {
+		background-position: 0 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0 50%;
+	}
+}
+
+@font-face {
+	font-family: 'Technology';
+	src: url('../font/Technology-Bold.ttf') format('truetype');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+}
+
+li {
+	list-style: none;
+}
+
+html {
+	height: 100%;
+	font-family: 'Technology';
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	padding: 0 15px;
+	&::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(-45deg, rgba(9, 69, 138, 0.2), rgba(68, 155, 255, 0.7), rgba(117, 113, 251, 0.7), rgba(68, 155, 255, 0.7), rgba(9, 69, 138, 0.2));
+		background-size: 400% 400%;
+		animation: Gradient 15s ease infinite;
+		z-index: -999;
+	}
+}
+
+#main {
+	background-color: #455a64;
+	border-radius: 4px;
+}
+
+.stage {
+	padding: 10px;
+	padding-bottom: 0;
+	&_game {
+		position: relative;
+		width: 1100px;
+		height: 500px;
+		background-color: #37474f;
+		&__snake {
+			li {
+				position: absolute;
+				width: 20px;
+				height: 20px;
+				background-image: url(../img/snake-body.png);
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+				&:first-child {
+					background-image: url(../img/snake-head.png);
+				}
+			}
+		}
+		&__food {
+			position: absolute;
+			width: 20px;
+			height: 20px;
+			background: url(../img/food.png) no-repeat;
+			background-size: 100% 100%;
+		}
+	}
+}
+
+.panel {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px;
+	user-select: none;
+	font-size: 24px;
+	color: #121212;
+}
