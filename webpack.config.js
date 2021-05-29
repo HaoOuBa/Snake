@@ -8,7 +8,8 @@ module.exports = {
 	entry: './src/index.ts',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'bundle.js'
+		filename: 'bundle.js',
+		publicPath: './',
 	},
 	devServer: {
 		host: '127.0.0.1',

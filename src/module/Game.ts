@@ -25,7 +25,7 @@ export default class Game {
 	}
 	/* 控制蛇的移动 */
 	run(): void {
-		if (!this.isAlive) return alert('游戏结束！');
+		if (!this.isAlive) return;
 		clearTimeout(this.timer);
 		let X = this.snake.X;
 		let Y = this.snake.Y;
@@ -50,6 +50,7 @@ export default class Game {
 			this.snake.X = X;
 			this.snake.Y = Y;
 		} catch {
+			alert('你凉了');
 			this.isAlive = false;
 		}
 		this.timer = setTimeout(this.run.bind(this), 300 - (this.panel.level - 1) * 30);

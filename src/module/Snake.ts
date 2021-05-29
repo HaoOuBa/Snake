@@ -34,15 +34,13 @@ export default class Snake {
 	/* 设置蛇头的X轴位置 */
 	set X(value: number) {
 		if (this.X === value) return;
-		/* 判断是否撞墙 */
-		if (value < 0 || value > 1100 - this.Width) {
-			throw new Error('THE END!');
-		}
 		/* 判断蛇头是否往反方向走 */
 		if (this.snakeBodies[1] && (<HTMLElement>this.snakeBodies[1]).offsetLeft === value) {
 			if (value > this.X) value = this.X - this.Width;
 			else value = this.X + this.Width;
 		}
+		/* 判断是否撞墙 */
+		if (value < 0 || value > 1100 - this.Width) throw new Error('THE END!');
 		this.moveBody();
 		this.snakeHead.style.left = value + 'px';
 		this.checkBumpSelf();
@@ -50,15 +48,13 @@ export default class Snake {
 	/* 设置蛇头的Y轴位置 */
 	set Y(value: number) {
 		if (this.Y === value) return;
-		/* 判断是否撞墙 */
-		if (value < 0 || value > 1100 - this.Height) {
-			throw new Error('THE END!');
-		}
 		/* 判断蛇头是否往反方向走 */
 		if (this.snakeBodies[1] && (<HTMLElement>this.snakeBodies[1]).offsetTop === value) {
 			if (value > this.Y) value = this.Y - this.Height;
 			else value = this.Y + this.Height;
 		}
+		/* 判断是否撞墙 */
+		if (value < 0 || value > 500 - this.Height) throw new Error('THE END!');
 		this.moveBody();
 		this.snakeHead.style.top = value + 'px';
 		this.checkBumpSelf();
